@@ -1,0 +1,21 @@
+{% extends 'layouts/main.html' %}
+{% load staticfiles %}
+
+{% block content %}
+	<h1 class="lead"><span class="text-danger">{{detail_title}}</span> <span>{{ anime.title }}</span></h1>
+
+	<p class="lead text-justify"><span class="text-danger">{{ detail_type }}</span> <span>{{ anime.get_type_anime_display }}</span></p>
+	<p class="lead text-justify"><span class="text-danger">{{ detail_state }}</span> <span>{{ anime.get_condition_display }}</span></p>
+	<p class="lead text-justify"><span class="text-danger">{{ detail_description }}</span> <span>{{ anime.description }}</span></p>
+
+	{% for categorie in anime.categorie_set.all %}
+		<p class="lead text-justify"><span class="text-danger">{{ detail_categories }}</span> <span>{{ categorie.categories }}</span></p>
+	{% endfor %}
+
+	{% if anime.image_BD %}
+		<img class="img-thumbnail center-block" src="{{STATIC_URL}}images/{{anime.image_BD}}">
+	{% else %}
+		<img class="img-thumbnail center-block" src="{% static 'images/default.jpg' %}">
+	{% endif %}
+
+{% endblock %}

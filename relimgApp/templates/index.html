@@ -1,0 +1,37 @@
+{% extends 'layouts/main.html' %}
+{% load staticfiles %}
+
+{% block content %}
+	
+		{% if anime_list %}
+			<div class="row">
+			{% for anime in anime_list %}
+				<div class="col-md-4" style="margin-top:2%">
+					<div class="ih-item circle effect5">
+						<a href="{% url 'details' anime.id %}">
+							{% if anime.image_BD %}
+								<div class="img"><img src="{{STATIC_URL}}images/{{anime.image_BD}}" alt="{{anime.image_BD}}"></div>
+							{% else %}
+								<div class="img"><img src="{% static 'images/default.jpg' %}" alt="default.jpg"></div>
+							{% endif %}
+
+					 		<div class="info">
+					 			<div class="info-back">
+					            	<h3>{{ anime.title }}</h3>
+					            	<p>{{ index_anime_description }}</p>
+					          	</div>
+							</div>
+						</a>
+					</div>
+				</div>
+			{% endfor %}
+			</div>
+
+		{% else %}
+
+			<div class="col-xs-12 col-sm-12 col-md-12">
+				<p>No hay animes disponibles</p>
+			</div>
+		{% endif %}
+
+{% endblock %}
